@@ -43,6 +43,8 @@ class HookEntry : IYukiHookXposedInit {
     }
 
     override fun onHook() = encase {
+        var isLoaded = false
+
         loadApp(name = PackageName.EKO) {
             ClassFinder.instance.find(this.appInfo.packageName, this.appInfo.sourceDir)
             resources().hook {
@@ -80,12 +82,15 @@ class HookEntry : IYukiHookXposedInit {
                         returnType = UnitType
                     }
                     afterHook {
-                        Toast.makeText(instance(), "EkoHelper Loaded!", Toast.LENGTH_SHORT).show()
+                        if (!isLoaded) {
+                            Toast.makeText(instance(), "EkoHelper Loaded!", Toast.LENGTH_SHORT).show()
+                            isLoaded = true
+                        }
                     }
                 }
             }
 
-            // Return "US" to bypass location restriction, though may have side affects
+            // Return "US" to bypass location restriction, though may have side effects
             "java.util.Locale".hook {
                 injectMember {
                     method {
@@ -105,6 +110,18 @@ class HookEntry : IYukiHookXposedInit {
                         // the first argument is the recording time, we change it to 12000s
                         this.args(0).set(12000.0f)
                         loggerI(msg = "Start Record with 12000s limit.")
+                    }
+                }
+            }
+
+            // disable force update dialog
+            "com.ekodevices.app.common.BaseActivity".hook {
+                injectMember {
+                    method {
+                        name = "x0" // only supports app version 4.0.2
+                        replaceUnit {
+                            loggerI(msg = "Bypassed force update dialog.")
+                        }
                     }
                 }
             }

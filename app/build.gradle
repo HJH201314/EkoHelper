@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'cn.fcraft.eko'
-    compileSdk 33
+    compileSdk 35
 
     defaultConfig {
         applicationId 'cn.fcraft.eko'
         minSdk 27
-        targetSdk 33
+        targetSdk 34
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
 
@@ -48,17 +48,17 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.core:core-ktx:1.13.1'
     compileOnly 'de.robv.android.xposed:api:82'
     implementation 'com.highcapable.yukihookapi:api:1.1.11'
     ksp 'com.highcapable.yukihookapi:ksp-xposed:1.1.11'
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
-    implementation 'androidx.core:core-ktx:1.10.1'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'org.luckypray:dexkit:2.0.0-rc3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
