@@ -64,13 +64,21 @@ class HookEntry : IYukiHookXposedInit {
                     }
                     replaceTo("App Settings (Pro)")
                 }
-                // The Record button
+                // The "Record" button on older version
                 injectResource {
                     conditions {
                         name = "fragment_ce_btn_record"
                         string()
                     }
-                    replaceTo("Record (100min)")
+                    replaceTo("Record (Pro)")
+                }
+                // The "Record" button on newer version
+                injectResource {
+                    conditions {
+                        name = "ce_btn_record_title_dc_sheet_onboarding_title"
+                        string()
+                    }
+                    replaceTo("Record (Pro)")
                 }
             }
 
