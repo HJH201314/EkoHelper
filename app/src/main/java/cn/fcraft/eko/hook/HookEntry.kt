@@ -64,13 +64,21 @@ class HookEntry : IYukiHookXposedInit {
                     }
                     replaceTo("App Settings (Pro)")
                 }
+                // The entry of Live Stream
+                injectResource {
+                    conditions {
+                        name = "live_stream_view_title_label_dc_sheet_recording_header"
+                        string()
+                    }
+                    replaceTo("Live stream!")
+                }
                 // The "Record" button on older version
                 injectResource {
                     conditions {
                         name = "fragment_ce_btn_record"
                         string()
                     }
-                    replaceTo("Record (Pro)")
+                    replaceTo("Record!")
                 }
                 // The "Record" button on newer version
                 injectResource {
@@ -78,7 +86,7 @@ class HookEntry : IYukiHookXposedInit {
                         name = "ce_btn_record_title_dc_sheet_onboarding_title"
                         string()
                     }
-                    replaceTo("Record (Pro)")
+                    replaceTo("Record!")
                 }
             }
 
@@ -130,6 +138,16 @@ class HookEntry : IYukiHookXposedInit {
                         replaceUnit {
                             loggerI(msg = "Bypassed force update dialog.")
                         }
+                    }
+                }
+            }
+
+            // enable Live Stream entry
+            "com.ekodevices.ekodata.model.user.Plan".hook {
+                injectMember {
+                    method {
+                        name = "getLiveStream"
+                        replaceToTrue()
                     }
                 }
             }
